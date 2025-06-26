@@ -19,7 +19,3 @@
 .button:hover {
     color: black; /* azul mais escuro ao passar o mouse */
 }
-
-.fundo{
-  background-image: url('/generator/public/images/fundo-de-icone-de-viagem-fundo-de-icone-de-vetor-de-ferias_645658-733.avif');
-}

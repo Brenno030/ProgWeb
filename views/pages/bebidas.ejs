@@ -1,0 +1,29 @@
+<main class="cards-container" style="padding-top: 120px;">
+  <div class="container mt-5">
+    <div class="row g-4 justify-content-center">
+      <% bebidas.forEach(bebida => { %>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header text-center">
+              <img
+                src="<%= bebida.imagem %>"
+                alt="Imagem de <%= bebida.nome %>"
+                class="card-img"
+              />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title d-flex justify-content-between">
+                <span><%= bebida.nome %></span>
+                <span class="price">R$ <%= bebida.preco.toFixed(2) %></span>
+              </h5>
+              <p class="card-text"><%= bebida.descricao %></p>
+              <a href="/carrinho/<%= bebida._id %>" class="btn btn-primary w-100 mt-2">
+              Adicionar ao Pedido
+            </a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-end mb-3">
+    <a href="/admin/bebidas/novo" class="btn btn-success">Criar Nova Bebida</a>
+  </div>
+  <div class="row g-4 justify-content-center">
+    <% bebidas.forEach(bebida => { %>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header text-center">
+            <img src="<%= bebida.imagem %>" alt="<%= bebida.nome %>" class="card-img" />
+          </div>
+          <div class="card-body">
+            <h5 class="card-title d-flex justify-content-between">
+              <span><%= bebida.nome %></span>
+              <span class="price">R$ <%= bebida.preco.toFixed(2) %></span>
+            </h5>
+            <p class="card-text"><%= bebida.descricao %></p>
+
+            <div class="d-flex justify-content-between">
+              <a href="/admin/bebidas/editar/<%= bebida._id %>" class="btn btn-warning">Editar</a>
+              <form action="/admin/bebidas/deletar/<%= bebida._id %>" method="POST">
+                <button type="submit" class="btn btn-danger">Deletar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>

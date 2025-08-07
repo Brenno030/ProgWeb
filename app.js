@@ -19,7 +19,7 @@ var usersRouter = require('./routes/users');
 var pratosRouter = require('./routes/pratos');
 var sobremesasRouter = require('./routes/sobremesas');
 var bebidasRouter = require('./routes/bebidas');
-var adminRouter = require('./routes/admin')
+const adminRouter = require('./routes/admin')
 
 var app = express();
 
@@ -29,9 +29,11 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images', express.static('public/images'));
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -39,6 +41,8 @@ app.use('/pratos', pratosRouter);
 app.use('/bebidas', bebidasRouter);
 app.use('/sobremesas', sobremesasRouter);
 app.use('/admin', adminRouter);
+
+
 
 
 const port = 3000

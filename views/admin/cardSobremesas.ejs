@@ -1,13 +1,13 @@
 <div class="container mt-5">
   <div class="d-flex justify-content-end mb-3">
-    <a href="/admin/sobremesas/novo" class="btn btn-success">Criar Nova Sobremesa</a>
-  </div>
+  <%- include('../partials/btnCriar', { categoria }) %>
+</div>
   <div class="row g-4 justify-content-center">
     <% sobremesas.forEach(sobremesa => { %>
       <div class="col-md-4">
         <div class="card">
           <div class="card-header text-center">
-            <img src="<%= sobremesa.imagem %>" alt="<%= sobremesa.nome %>" class="card-img" />
+            <img src="/images/<%= sobremesa.imagem %>" alt="<%= sobremesa.nome %>" class="card-img" />
           </div>
           <div class="card-body">
             <h5 class="card-title d-flex justify-content-between">
@@ -17,7 +17,18 @@
             <p class="card-text"><%= sobremesa.descricao %></p>
 
             <div class="d-flex justify-content-between">
-              <a href="/admin/sobremesas/editar/<%= sobremesa._id %>" class="btn btn-warning">Editar</a>
+             <form action="/admin/pratos/editar/<%= sobremesa._id %>" method="POST">
+                <button class="btn btn-warning" type="button"
+                      data-bs-toggle="modal" 
+                      data-bs-target="#modalEditar"
+                      data-id="<%= sobremesa._id %>"
+                      data-nome="<%= sobremesa.nome %>"
+                      data-descricao="<%= sobremesa.descricao %>"
+                      data-preco="<%= sobremesa.preco %>"
+                      data-imagem="<%= sobremesa.imagem %>">
+                Editar
+              </button>
+              </form>
               <form action="/admin/sobremesas/deletar/<%= sobremesa._id %>" method="POST">
                 <button type="submit" class="btn btn-danger">Deletar</button>
               </form>
@@ -27,4 +38,7 @@
       </div>
     <% }) %>
   </div>
+</div>
+ <!-- Incluindo o modal de edição -->
+  <%- include('../partials/btnEditar') %>
 </div>

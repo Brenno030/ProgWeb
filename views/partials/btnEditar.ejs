@@ -1,0 +1,55 @@
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="formEditar" action="/admin/pratos/editar/placeholder" method="POST" enctype="multipart/form-data">
+         <input type="hidden" name="_id" id="editar-id" />
+         <input type="hidden" id="editar-imagemAntiga" name="imagemAntiga" />
+         <input type="hidden" name="categoria" value="<%= categoria %>">
+
+         <div class="mb-3">
+           <label for="editar-nome" class="form-label">Nome</label>
+           <input type="text" class="form-control" id="editar-nome" name="nome" required />
+         </div>
+         <div class="mb-3">
+           <label for="editar-descricao" class="form-label">Descrição</label>
+           <textarea class="form-control" id="editar-descricao" name="descricao" required></textarea>
+         </div>
+         <div class="mb-3">
+           <label for="editar-preco" class="form-label">Preço</label>
+           <input type="number" step="0.01" class="form-control" id="editar-preco" name="preco" required />
+         </div>
+         <div class="mb-3">
+           <label for="editar-imagem" class="form-label">Nova imagem (opcional)</label>
+           <input type="file" class="form-control" id="editar-imagem" name="imagem" accept="image/*" />
+         </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  var modalEditar = document.getElementById('modalEditar');
+  modalEditar.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget;
+
+    var id = button.getAttribute('data-id');
+    var nome = button.getAttribute('data-nome');
+    var descricao = button.getAttribute('data-descricao');
+    var preco = button.getAttribute('data-preco');
+    var imagem = button.getAttribute('data-imagem');
+
+    modalEditar.querySelector('#editar-id').value = id;
+    modalEditar.querySelector('#editar-nome').value = nome;
+    modalEditar.querySelector('#editar-descricao').value = descricao;
+    modalEditar.querySelector('#editar-preco').value = preco;
+    modalEditar.querySelector('#editar-imagemAntiga').value = imagem;
+
+    const categoria = '<%= categoria %>';
+    modalEditar.querySelector('#formEditar').action = `/admin/${categoria}/editar/${id}`;
+  });
+</script>

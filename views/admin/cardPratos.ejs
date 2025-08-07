@@ -1,13 +1,13 @@
 <div class="container mt-5">
   <div class="d-flex justify-content-end mb-3">
-    <a href="/admin/pratos/novo" class="btn btn-success">Criar Novo Prato</a>
+   <%- include('../partials/btnCriar', { categoria }) %>
   </div>
   <div class="row g-4 justify-content-center">
     <% pratos.forEach(prato => { %>
       <div class="col-md-4">
         <div class="card">
           <div class="card-header text-center">
-            <img src="<%= prato.imagem %>" alt="<%= prato.nome %>" class="card-img" />
+           <img src="/images/<%= prato.imagem %>" alt="<%= prato.nome %>" class="card-img" />
           </div>
           <div class="card-body">
             <h5 class="card-title d-flex justify-content-between">
@@ -17,7 +17,16 @@
             <p class="card-text"><%= prato.descricao %></p>
 
             <div class="d-flex justify-content-between">
-              <a href="/admin/pratos/editar/<%= prato._id %>" class="btn btn-warning">Editar</a>
+              <button class="btn btn-warning" type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalEditar"
+                  data-id="<%= prato._id %>"
+                  data-nome="<%= prato.nome %>"
+                  data-descricao="<%= prato.descricao %>"
+                  data-preco="<%= prato.preco %>"
+                  data-imagem="<%= prato.imagem %>">
+                  Editar
+                </button>
               <form action="/admin/pratos/deletar/<%= prato._id %>" method="POST">
                 <button type="submit" class="btn btn-danger">Deletar</button>
               </form>
@@ -27,4 +36,6 @@
       </div>
     <% }) %>
   </div>
+
+  <%- include('../partials/btnEditar') %>
 </div>

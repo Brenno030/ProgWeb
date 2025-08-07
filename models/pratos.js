@@ -10,3 +10,4 @@ const pratoSchema = new mongoose.Schema({
 const Prato = mongoose.model('Prato', pratoSchema);
 
 module.exports = Prato;
+  
